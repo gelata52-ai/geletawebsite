@@ -34,5 +34,5 @@ This website is hosted on **GitHub Pages**.
 To run it locally:
 
 ```bash
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
+git clone https://github.com/geletashelema/portfolio.git
+cd portfolio
