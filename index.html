@@ -5,12 +5,792 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geleta Shelema - Creative Designer & Video Editor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff0050;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-tiktok {
+            background: linear-gradient(to right, #000000, var(--accent));
+            color: white;
+        }
+
+        .btn-tiktok:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 80, 0.3);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .skills .section-title {
+            color: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .project-tech span {
+            background: rgba(106, 17, 203, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* TikTok Section */
+        .tiktok {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #000000 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .tiktok .section-title {
+            color: white;
+        }
+
+        .tiktok-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tiktok-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tiktok-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .tiktok-feature i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .tiktok-feature h3 {
+            margin-bottom: 1rem;
+        }
+
+        .tiktok-feature p {
+            color: #ccc;
+        }
+
+        .tiktok-workflow {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .workflow-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--light);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .service-card ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .service-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-card li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Updates Section */
+        .updates {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .updates .section-title {
+            color: white;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .update-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            backdrop-filter: blur(10px);
+        }
+
+        .update-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .update-icon i {
+            font-size: 2rem;
+        }
+
+        .update-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .update-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .update-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .update-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .update-features li {
+            padding: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+
+        .update-status {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .completed {
+            background: var(--success);
+        }
+
+        .system-summary {
+            display: flex;
+            justify-content: center;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .summary-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .summary-motto {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .contact-methods {
+            margin-bottom: 2rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .workflow-steps {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 80%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                border-radius: 0 0 0 15px;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container nav-container">
             <div class="nav-logo">
                 <a href="#home">Geleta Shelema</a>
             </div>
@@ -19,6 +799,8 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
+                <a href="#tiktok" class="nav-link">TikTok</a>
+                <a href="#services" class="nav-link">Services</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
@@ -31,7 +813,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-container">
+        <div class="container hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">Geleta Shelema</h1>
                 <h2 class="hero-subtitle">Creative Designer & Video Editor</h2>
@@ -42,10 +824,11 @@
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">View My Portfolio</a>
                     <a href="#contact" class="btn btn-secondary">Hire Me</a>
+                    <a href="#tiktok" class="btn btn-tiktok">TikTok Services</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="gelo.jpg" alt="Geleta Shelema">
+                <img src="PIN.jpg" alt="Geleta Shelema">
             </div>
         </div>
     </section>
@@ -67,6 +850,10 @@
                     </p>
                     <div class="about-features">
                         <div class="feature">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok Video Editing & Optimization</span>
+                        </div>
+                        <div class="feature">
                             <i class="fas fa-palette"></i>
                             <span>Creative Design</span>
                         </div>
@@ -81,6 +868,10 @@
                         <div class="feature">
                             <i class="fas fa-bullhorn"></i>
                             <span>Brand Storytelling</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Content Strategy</span>
                         </div>
                     </div>
                 </div>
@@ -122,26 +913,19 @@
                 </div>
 
                 <div class="skill-category">
-                    <h3><i class="fas fa-cube"></i> 3D & Animation</h3>
+                    <h3><i class="fab fa-tiktok"></i> TikTok Specialization</h3>
                     <div class="skill-items">
-                        <span class="skill-item">Blender</span>
-                        <span class="skill-item">3D Modeling</span>
-                        <span class="skill-item">Animation</span>
-                        <span class="skill-item">Motion Design</span>
-                        <span class="skill-item">Character Design</span>
-                        <span class="skill-item">Texturing</span>
+                        <span class="skill-item">Trend Analysis</span>
+                        <span class="skill-item">Viral Content Creation</span>
+                        <span class="skill-item">Short-form Video Editing</span>
+                        <span class="skill-item">Sound Optimization</span>
+                        <span class="skill-item">Hashtag Strategy</span>
+                        <span class="skill-item">Engagement Optimization</span>
+                        <span class="skill-item">TikTok Effects</span>
+                        <span class="skill-item">Content Scheduling</span>
                     </div>
                 </div>
- <div class="skill-category">
-                    <h3><i class="fas fa-desktop"></i> CCTV camera </h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Installation </span>
-                        <span class="skill-item">Network configuration (IP setup, port forwarding)</span>
-                        <span class="skill-item">Recording and playback verification</span>
-                        <span class="skill-item">DVR/NVR installation and setup</span>
-                      
-                    </div>
-                </div>
+
                 <div class="skill-category">
                     <h3><i class="fas fa-lightbulb"></i> Creative Skills</h3>
                     <div class="skill-items">
@@ -193,6 +977,20 @@
 
                 <div class="project-card">
                     <div class="project-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>TikTok Viral Campaign</h3>
+                    <p>Created and edited 30+ TikTok videos that generated over 2M views and 50K followers for a beauty brand.</p>
+                    <div class="project-tech">
+                        <span>TikTok</span>
+                        <span>Premiere Pro</span>
+                        <span>Trend Analysis</span>
+                    </div>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
                         <i class="fas fa-shopping-bag"></i>
                     </div>
                     <h3>E-commerce Product Videos</h3>
@@ -232,19 +1030,62 @@
                     </div>
                     <a href="#" class="project-link">View Project</a>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-music"></i>
+    <!-- TikTok Section -->
+    <section id="tiktok" class="tiktok">
+        <div class="container">
+            <h2 class="section-title">TikTok Specialization</h2>
+            <p class="section-subtitle">Creating viral content that drives engagement and growth</p>
+            
+            <div class="tiktok-features">
+                <div class="tiktok-feature">
+                    <i class="fas fa-fire"></i>
+                    <h3>Trend Analysis</h3>
+                    <p>Stay ahead of the curve by identifying and leveraging emerging TikTok trends and challenges.</p>
+                </div>
+                <div class="tiktok-feature">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Quick Turnaround</h3>
+                    <p>Fast editing and delivery to capitalize on trending topics while they're still relevant.</p>
+                </div>
+                <div class="tiktok-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Optimization</h3>
+                    <p>Strategically optimize videos for maximum reach, engagement, and follower growth.</p>
+                </div>
+            </div>
+
+            <div class="tiktok-workflow">
+                <h3 style="text-align: center; margin-bottom: 2rem;">My TikTok Content Creation Process</h3>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <h4>Trend Research</h4>
+                        <p>Identify trending sounds, effects, and content formats</p>
                     </div>
-                    <h3>Music Video Production</h3>
-                    <p>Edited and color graded a music video with special effects and seamless transitions.</p>
-                    <div class="project-tech">
-                        <span>DaVinci Resolve</span>
-                        <span>VFX</span>
-                        <span>Color Grading</span>
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <h4>Content Planning</h4>
+                        <p>Develop concepts that align with trends and brand identity</p>
                     </div>
-                    <a href="#" class="project-link">View Project</a>
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <h4>Rapid Editing</h4>
+                        <p>Fast-paced editing optimized for TikTok's short-form format</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <h4>Optimization</h4>
+                        <p>Add captions, effects, and strategic hashtags for maximum reach</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <h4>Performance Tracking</h4>
+                        <p>Monitor analytics and adjust strategy based on performance</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,14 +1117,100 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <i class="fas fa-cube"></i>
-                    <h3>Motion Graphics</h3>
+                    <i class="fab fa-tiktok"></i>
+                    <h3>TikTok Services</h3>
                     <ul>
-                        <li>Animated Logos</li>
-                        <li>Explainer Videos</li>
-                        <li>Title Sequences</li>
-                        <li>Visual Effects</li>
+                        <li>TikTok Video Creation</li>
+                        <li>Trend Analysis & Strategy</li>
+                        <li>Content Optimization</li>
+                        <li>Growth Strategy</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updates Section -->
+    <section id="updates" class="updates">
+        <div class="container">
+            <h2 class="section-title">Recent Work Updates</h2>
+            <p class="section-subtitle">Latest creative projects and completed work</p>
+            
+            <div class="updates-grid">
+                <div class="update-card">
+                    <div class="update-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="update-content">
+                        <h3>TikTok Campaign Launch</h3>
+                        <p class="update-date">Completed: January 2024</p>
+                        <ul class="update-features">
+                            <li>✅ 30 TikTok videos created and optimized</li>
+                            <li>✅ 2M+ views generated</li>
+                            <li>✅ 50K new followers gained</li>
+                            <li>✅ Engagement rate increased by 300%</li>
+                        </ul>
+                        <span class="update-status completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="update-card">
+                    <div class="update-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="update-content">
+                        <h3>Corporate Video Series</h3>
+                        <p class="update-date">Completed: December 2023</p>
+                        <ul class="update-features">
+                            <li>✅ 5-part training video series edited</li>
+                            <li>✅ Motion graphics and animations added</li>
+                            <li>✅ Professional audio mixing completed</li>
+                            <li>✅ Client approval received</li>
+                        </ul>
+                        <span class="update-status completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="update-card">
+                    <div class="update-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="update-content">
+                        <h3>Brand Identity Package</h3>
+                        <p class="update-date">Completed: December 2023</p>
+                        <ul class="update-features">
+                            <li>✅ Complete brand identity designed</li>
+                            <li>✅ Logo and brand guidelines delivered</li>
+                            <li>✅ Marketing collateral created</li>
+                            <li>✅ Client training provided</li>
+                        </ul>
+                        <span class="update-status completed">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-summary">
+                <div class="summary-card">
+                    <h3>Creative Performance Summary</h3>
+                    <div class="summary-stats">
+                        <div class="summary-stat">
+                            <span class="stat-value">50+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">2M+</span>
+                            <span class="stat-label">Views Generated</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">Fast</span>
+                            <span class="stat-label">Delivery</span>
+                        </div>
+                    </div>
+                    <p class="summary-motto">Creating engaging content that drives results!</p>
                 </div>
             </div>
         </div>
@@ -336,7 +1263,7 @@
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="#" class="social-link">
-                            <i class="fab fa-youtube"></i>
+                            <i class="fab fa-tiktok"></i>
                         </a>
                     </div>
                 </div>
@@ -353,6 +1280,7 @@
                             <option value="">Select Service</option>
                             <option value="graphics">Graphics Design</option>
                             <option value="video">Video Editing</option>
+                            <option value="tiktok">TikTok Services</option>
                             <option value="motion">Motion Graphics</option>
                             <option value="other">Other</option>
                         </select>
@@ -370,10 +1298,55 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Geleta Shelema. All rights reserved.</p>
-            <p>Creative Designer & Video Editor</p>
+            <p>Creative Designer & Video Editor | TikTok Specialist</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
 </body>
 </html>
